@@ -3,7 +3,7 @@ description: Apache Subversion (SVN) is a software versioning and revision contr
 image: https://subversion.apache.org/images/svn-square.jpg
 url: https://subversion.apache.org/
 created: 2024-01-01 00:00:00+00:00
-modified: 2024-01-01 00:00:00+00:00
+modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
 - version control
