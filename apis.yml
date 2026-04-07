@@ -1,65 +1,69 @@
 name: Subversion
-description: Apache Subversion (SVN) is a software versioning and revision control system that allows users to keep track of changes made to files and directories over time.
+description: Apache Subversion (SVN) is a software versioning and revision 
+  control system that allows users to keep track of changes made to files and 
+  directories over time.
 image: https://subversion.apache.org/images/svn-square.jpg
 url: https://subversion.apache.org/
 created: 2024-01-01 00:00:00+00:00
 modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
-- version control
-- svn
-- source control
-- repository
-- apache
-apis:
-- name: SVN Repository API
-  description: Access and manage SVN repositories through HTTP/HTTPS protocol using WebDAV and DeltaV extensions
-  image: https://subversion.apache.org/images/svn-square.jpg
-  humanURL: https://subversion.apache.org/docs/
-  baseURL: https://svn.example.com/repos/
-  tags:
-  - repository
   - version control
-  - webdav
-  properties:
-  - type: Documentation
-    url: https://svn.apache.org/repos/asf/subversion/trunk/doc/
-  - type: OpenAPI
-    url: https://api.example.com/svn-openapi.json
-  - type: Protocol
-    url: https://subversion.apache.org/docs/api-latest/
-  contact:
-  - type: Email
-    url: mailto:users@subversion.apache.org
-  - type: Mailing List
-    url: https://subversion.apache.org/mailing-lists.html
-  - type: Issues
-    url: https://issues.apache.org/jira/projects/SVN
+  - svn
+  - source control
+  - repository
+  - apache
+apis:
+  - name: SVN Repository API
+    description: >-
+      Access and manage SVN repositories through HTTP/HTTPS protocol using WebDAV
+      and DeltaV extensions.
+    image: https://subversion.apache.org/images/svn-square.jpg
+    humanURL: https://subversion.apache.org/docs/
+    baseURL: https://svn.example.com/repos/
+    tags:
+      - repository
+      - version control
+      - webdav
+    properties:
+      - type: Documentation
+        url: https://svn.apache.org/repos/asf/subversion/trunk/doc/
+      - type: OpenAPI
+        url: https://api.example.com/svn-openapi.json
+      - type: Protocol
+        url: https://subversion.apache.org/docs/api-latest/
+    contact:
+      - type: Email
+        url: mailto:users@subversion.apache.org
+      - type: Mailing List
+        url: https://subversion.apache.org/mailing-lists.html
+      - type: Issues
+        url: https://issues.apache.org/jira/projects/SVN
 maintainers:
-- name: Apache Software Foundation
-  email: dev@subversion.apache.org
-  url: https://www.apache.org/
+  - name: Apache Software Foundation
+    email: dev@subversion.apache.org
+    url: https://www.apache.org/
 common:
-- type: Getting Started
-  url: https://subversion.apache.org/quick-start
-- type: Book
-  url: https://svnbook.red-bean.com/
-- type: Downloads
-  url: https://subversion.apache.org/download/
-- type: Security
-  url: https://subversion.apache.org/security/
-- type: FAQ
-  url: https://subversion.apache.org/faq.html
-- type: Community
-  url: https://subversion.apache.org/mailing-lists.html
-- type: GitHub
-  url: https://github.com/apache/subversion
-- type: License
-  url: https://www.apache.org/licenses/LICENSE-2.0
+  - type: Getting Started
+    url: https://subversion.apache.org/quick-start
+  - type: Book
+    url: https://svnbook.red-bean.com/
+  - type: Downloads
+    url: https://subversion.apache.org/download/
+  - type: Security
+    url: https://subversion.apache.org/security/
+  - type: FAQ
+    url: https://subversion.apache.org/faq.html
+  - type: Community
+    url: https://subversion.apache.org/mailing-lists.html
+  - type: GitHub
+    url: https://github.com/apache/subversion
+  - type: License
+    url: https://www.apache.org/licenses/LICENSE-2.0
 include:
-- name: SVN C API
-  url: https://api.example.com/svn-c-api.yaml
-- name: SVN Python Bindings
-  url: https://api.example.com/svn-python-api.yaml
-- name: SVN Java Bindings
-  url: https://api.example.com/svn-java-api.yaml
+  - name: SVN C API
+    url: https://api.example.com/svn-c-api.yaml
+  - name: SVN Python Bindings
+    url: https://api.example.com/svn-python-api.yaml
+  - name: SVN Java Bindings
+    url: https://api.example.com/svn-java-api.yaml
