@@ -1,18 +1,16 @@
 name: Subversion
-description: Apache Subversion (SVN) is a software versioning and revision 
-  control system that allows users to keep track of changes made to files and 
-  directories over time.
+description: Apache Subversion (SVN) is a software versioning and revision control system that allows users to keep track of changes made to files and directories over time.
 image: https://subversion.apache.org/images/svn-square.jpg
 url: https://subversion.apache.org/
 created: 2024-01-01 00:00:00+00:00
 modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
-  - version control
-  - svn
-  - source control
-  - repository
-  - apache
+  - Apache
+  - Repository
+  - Source Control
+  - Svn
+  - Version Control
 apis:
   - name: SVN Repository API
     description: >-
@@ -22,9 +20,9 @@ apis:
     humanURL: https://subversion.apache.org/docs/
     baseURL: https://svn.example.com/repos/
     tags:
-      - repository
-      - version control
-      - webdav
+      - Repository
+      - Version Control
+      - Webdav
     properties:
       - type: Documentation
         url: https://svn.apache.org/repos/asf/subversion/trunk/doc/
