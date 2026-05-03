@@ -1,0 +1,176 @@
+vocabulary:
+  name: Apache Subversion Vocabulary
+  description: >-
+    Vocabulary for Apache Subversion (SVN) version control concepts, WebDAV/DeltaV
+    protocol terms, and repository management operations.
+  created: '2026-05-02'
+  modified: '2026-05-02'
+  tags:
+    - Apache
+    - Repository
+    - Source Control
+    - Version Control
+
+  terms:
+
+    - term: Repository
+      definition: >-
+        The central store of all versioned data in Subversion. A repository holds
+        a complete history of changes to files and directories, identified by a
+        unique UUID and accessed via URL.
+      tags:
+        - Core
+        - Repository
+
+    - term: Revision
+      definition: >-
+        A snapshot of the entire repository tree at a specific point in time,
+        identified by an integer. Every commit increments the global revision counter.
+        Revision 0 is the empty initial state.
+      tags:
+        - Core
+        - History
+
+    - term: Working Copy
+      definition: >-
+        A local checkout of a repository subtree at a specific revision. Users
+        modify files in their working copy and commit changes back to the repository.
+      tags:
+        - Core
+        - Client
+
+    - term: Commit
+      definition: >-
+        An atomic operation that records a set of changes to the repository,
+        creating a new revision number. Commits are transactional — they either
+        succeed completely or fail with no partial changes.
+      tags:
+        - Core
+        - Operations
+
+    - term: Trunk
+      definition: >-
+        The main development line in a Subversion repository, typically located
+        at the path /trunk. Corresponds to the default branch in other VCS systems.
+      tags:
+        - Branching
+
+    - term: Branch
+      definition: >-
+        A copy of a directory tree made at a specific revision for parallel
+        development. In SVN, branches are lightweight copies stored at paths
+        like /branches/{branch-name}.
+      tags:
+        - Branching
+
+    - term: Tag
+      definition: >-
+        An immutable snapshot of a directory tree at a specific revision, typically
+        used to mark releases. Tags are stored at paths like /tags/{version}.
+        SVN does not enforce immutability — convention handles it.
+      tags:
+        - Branching
+        - Release
+
+    - term: Merge Tracking
+      definition: >-
+        A feature introduced in SVN 1.5 that records which revisions from one
+        branch have been merged into another, preventing repeated application
+        of the same changes.
+      tags:
+        - Branching
+        - Operations
+
+    - term: WebDAV
+      definition: >-
+        Web Distributed Authoring and Versioning — an extension of HTTP that
+        allows clients to read and write resources on web servers. Subversion
+        uses WebDAV/DeltaV for HTTP-based repository access via mod_dav_svn.
+      tags:
+        - Protocol
+
+    - term: DeltaV
+      definition: >-
+        An extension to WebDAV (RFC 3253) that adds versioning semantics.
+        Subversion implements a subset of DeltaV for its HTTP transport protocol.
+      tags:
+        - Protocol
+
+    - term: PROPFIND
+      definition: >-
+        A WebDAV HTTP method used to retrieve properties (metadata) from a
+        resource or collection. SVN clients use PROPFIND to read file properties,
+        revision properties, and directory listings.
+      tags:
+        - Protocol
+        - Operations
+
+    - term: REPORT
+      definition: >-
+        A WebDAV method used by SVN clients to send custom queries to the server.
+        Update reports, log reports, and status reports are all sent via REPORT
+        with an XML request body.
+      tags:
+        - Protocol
+        - Operations
+
+    - term: MKACTIVITY
+      definition: >-
+        A DeltaV HTTP method that creates a new "activity" (transaction) on the
+        server. Every SVN commit begins with MKACTIVITY to obtain a transaction URL.
+      tags:
+        - Protocol
+        - Operations
+
+    - term: mod_dav_svn
+      definition: >-
+        An Apache HTTP Server module that provides WebDAV/DeltaV access to
+        Subversion repositories. It enables SVN clients to access repositories
+        via HTTP/HTTPS.
+      tags:
+        - Server
+        - Infrastructure
+
+    - term: svnserve
+      definition: >-
+        The standalone Subversion server daemon that uses the custom svn:// or
+        svn+ssh:// protocol instead of HTTP. Lighter than Apache but lacks
+        WebDAV capabilities.
+      tags:
+        - Server
+        - Protocol
+
+    - term: svnsync
+      definition: >-
+        A Subversion utility for creating and maintaining read-only mirror
+        repositories. Used for backup and geographic distribution of repository
+        content.
+      tags:
+        - Tools
+
+    - term: Property
+      definition: >-
+        Arbitrary key-value metadata attached to files, directories, or revisions
+        in Subversion. Properties are versioned (on files/directories) or
+        unversioned (on revisions).
+      tags:
+        - Core
+        - Metadata
+
+    - term: Lock
+      definition: >-
+        A mechanism for pessimistic concurrency control where a user exclusively
+        reserves a file for editing, preventing simultaneous modifications.
+        Used mainly for binary files that cannot be merged.
+      tags:
+        - Operations
+        - Concurrency
+
+    - term: Conflict
+      definition: >-
+        A state that occurs when changes from an update overlap with local
+        modifications in a working copy, requiring manual resolution before
+        a commit can proceed.
+      tags:
+        - Operations
+        - Concurrency

@@ -1,0 +1,77 @@
+{
+  "operation": "Commit Transaction Lifecycle",
+  "steps": [
+    {
+      "step": 1,
+      "name": "Create Transaction (MKACTIVITY)",
+      "request": {
+        "method": "MKACTIVITY",
+        "url": "https://svn.example.com/repos/myproject/$svn/act/",
+        "headers": {
+          "Authorization": "Basic dXNlcjpwYXNz"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Location": "https://svn.example.com/repos/myproject/$svn/act/abc123"
+        }
+      }
+    },
+    {
+      "step": 2,
+      "name": "Checkout Working Resource (CHECKOUT)",
+      "request": {
+        "method": "CHECKOUT",
+        "url": "https://svn.example.com/repos/myproject/!svn/ver/1234/trunk/README.txt",
+        "headers": {
+          "Authorization": "Basic dXNlcjpwYXNz",
+          "Activity-Collection-Set": "https://svn.example.com/repos/myproject/$svn/act/abc123"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Location": "https://svn.example.com/repos/myproject/$svn/wrk/abc123/trunk/README.txt"
+        }
+      }
+    },
+    {
+      "step": 3,
+      "name": "Upload File Content (PUT)",
+      "request": {
+        "method": "PUT",
+        "url": "https://svn.example.com/repos/myproject/$svn/wrk/abc123/trunk/README.txt",
+        "headers": {
+          "Authorization": "Basic dXNlcjpwYXNz",
+          "Content-Type": "application/octet-stream"
+        },
+        "body": "# My Project\n\nUpdated README content.\n"
+      },
+      "response": {
+        "status": 204
+      }
+    },
+    {
+      "step": 4,
+      "name": "Finalize Commit (MERGE)",
+      "request": {
+        "method": "MERGE",
+        "url": "https://svn.example.com/repos/myproject/",
+        "headers": {
+          "Authorization": "Basic dXNlcjpwYXNz",
+          "Content-Type": "text/xml"
+        },
+        "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?><D:merge xmlns:D=\"DAV:\"><D:source><D:href>https://svn.example.com/repos/myproject/$svn/act/abc123</D:href></D:source><D:no-auto-merge/><D:no-checkout/></D:merge>"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "revision": 1235,
+          "author": "jsmith",
+          "date": "2026-05-02T10:00:00Z"
+        }
+      }
+    }
+  ]
+}

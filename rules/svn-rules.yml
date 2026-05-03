@@ -1,0 +1,67 @@
+extends: spectral:oas
+rules:
+
+  svn-operations-have-tags:
+    description: All SVN WebDAV operations must have at least one tag
+    severity: warn
+    given: "$.paths[*][get,put,post,delete,patch]"
+    then:
+      field: tags
+      function: truthy
+
+  svn-operations-have-summaries:
+    description: All SVN WebDAV operations must have a summary
+    severity: error
+    given: "$.paths[*][get,put,post,delete,patch]"
+    then:
+      field: summary
+      function: truthy
+
+  svn-operations-have-operation-ids:
+    description: All SVN WebDAV operations must have an operationId
+    severity: error
+    given: "$.paths[*][get,put,post,delete,patch]"
+    then:
+      field: operationId
+      function: truthy
+
+  svn-summaries-title-case:
+    description: SVN operation summaries must use Title Case
+    severity: warn
+    given: "$.paths[*][get,put,post,delete,patch].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*([ ][A-Z][a-zA-Z0-9]*)*$"
+
+  svn-operations-have-descriptions:
+    description: All SVN WebDAV operations must have a description
+    severity: warn
+    given: "$.paths[*][get,put,post,delete,patch]"
+    then:
+      field: description
+      function: truthy
+
+  svn-responses-have-descriptions:
+    description: All response objects must have a description
+    severity: warn
+    given: "$.paths[*][*].responses[*]"
+    then:
+      field: description
+      function: truthy
+
+  svn-path-parameters-required:
+    description: All path parameters must be marked as required
+    severity: error
+    given: "$.paths[*][*].parameters[?(@.in == 'path')]"
+    then:
+      field: required
+      function: truthy
+
+  svn-components-schemas-described:
+    description: All component schemas must have a description
+    severity: warn
+    given: "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy

@@ -1,0 +1,18 @@
+{
+  "name": "SVN Repository Structure",
+  "description": "The data structure of an Apache Subversion repository object.",
+  "created": "2026-05-02",
+  "modified": "2026-05-02",
+  "structure": {
+    "root": {
+      "type": "object",
+      "fields": [
+        { "name": "uuid", "type": "string", "required": true, "description": "Repository UUID" },
+        { "name": "root", "type": "string (uri)", "required": true, "description": "Repository root URL" },
+        { "name": "revision", "type": "integer", "required": true, "description": "HEAD revision number" },
+        { "name": "name", "type": "string", "required": false, "description": "Repository name" },
+        { "name": "type", "type": "string (enum: fsfs|bdb|svn-ng)", "required": false, "description": "Storage backend" }
+      ]
+    }
+  }
+}

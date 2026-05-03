@@ -1,0 +1,21 @@
+{
+  "operation": "Get File at HEAD",
+  "request": {
+    "method": "GET",
+    "url": "https://svn.example.com/repos/myproject/trunk/README.txt",
+    "headers": {
+      "Authorization": "Basic dXNlcjpwYXNz",
+      "Accept": "application/octet-stream"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/plain",
+      "Content-Length": "512",
+      "ETag": "//1234//",
+      "DAV": "1,2,version-control,checkout,working-resource,merge,baseline,activity,version-controlled-collection"
+    },
+    "body": "# My Project\n\nWelcome to myproject SVN repository.\n"
+  }
+}

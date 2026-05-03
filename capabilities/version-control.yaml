@@ -1,0 +1,182 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SVN Version Control"
+  description: >-
+    Unified version control workflow capability for Apache Subversion. Combines
+    repository browsing, file operations, commit lifecycle management, and
+    historical revision access into a single workflow-oriented interface for
+    developers and automation tools.
+  tags:
+    - Apache
+    - Repository
+    - Source Control
+    - Subversion
+    - Version Control
+    - Webdav
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SVN_USERNAME: SVN_USERNAME
+      SVN_PASSWORD: SVN_PASSWORD
+
+capability:
+  consumes:
+    - import: svn-webdav
+      location: ./shared/svn-webdav.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: svn-version-control-api
+      description: "Unified REST API for Apache Subversion version control operations."
+      resources:
+        - path: /v1/repository
+          name: repository
+          description: "Repository root information and metadata"
+          operations:
+            - method: GET
+              name: get-repository-root
+              description: "Get repository root listing and metadata"
+              call: "svn-webdav.get-repository-root"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/files/{path}
+          name: files
+          description: "File and directory access"
+          operations:
+            - method: GET
+              name: get-file
+              description: "Get file content or directory listing at HEAD"
+              call: "svn-webdav.get-file-or-directory"
+              with:
+                path: "rest.path"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: upload-file
+              description: "Upload file content as part of an active commit"
+              call: "svn-webdav.put-file"
+              with:
+                path: "rest.path"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-file
+              description: "Delete a file or directory in an active commit"
+              call: "svn-webdav.delete-file-or-directory"
+              with:
+                path: "rest.path"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/commits
+          name: commits
+          description: "Commit transaction lifecycle"
+          operations:
+            - method: POST
+              name: create-commit
+              description: "Create a new commit transaction"
+              call: "svn-webdav.create-commit-transaction"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/history/{revision}/files/{path}
+          name: history
+          description: "Historical file access by revision"
+          operations:
+            - method: GET
+              name: get-file-at-revision
+              description: "Retrieve file content at a specific historical revision"
+              call: "svn-webdav.get-revision-versioned-resource"
+              with:
+                revision: "rest.revision"
+                path: "rest.path"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: svn-version-control-mcp
+      transport: http
+      description: "MCP server for AI-assisted Subversion version control operations."
+      tools:
+        - name: browse-repository
+          description: "Browse the SVN repository root and see available projects"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "svn-webdav.get-repository-root"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-file
+          description: "Retrieve the content of a file or directory listing from SVN"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "svn-webdav.get-file-or-directory"
+          with:
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: upload-file
+          description: "Upload a file to an active SVN commit transaction"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "svn-webdav.put-file"
+          with:
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: delete-file
+          description: "Schedule a file or directory for deletion in an active SVN commit"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "svn-webdav.delete-file-or-directory"
+          with:
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-commit
+          description: "Start a new SVN commit transaction to stage file changes"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "svn-webdav.create-commit-transaction"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-file-at-revision
+          description: "Retrieve the historical content of a file at a specific SVN revision number"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "svn-webdav.get-revision-versioned-resource"
+          with:
+            revision: "tools.revision"
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,383 @@
+openapi: 3.1.0
+info:
+  title: SVN WebDAV HTTP API
+  description: >-
+    Apache Subversion repository access via the WebDAV/DeltaV protocol served by
+    mod_dav_svn. Clients perform version control operations — checkout, update,
+    commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination
+    of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard
+    HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).
+  version: '1.0.0'
+  contact:
+    name: Apache Subversion
+    url: https://subversion.apache.org/
+    email: users@subversion.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://subversion.apache.org/images/svn-square.jpg
+
+servers:
+  - url: https://svn.example.com/repos/{repository}
+    description: Subversion repository served via mod_dav_svn
+    variables:
+      repository:
+        default: myproject
+        description: Repository name
+
+tags:
+  - name: Repository
+    description: Repository root and metadata operations
+  - name: Files
+    description: File and directory content retrieval
+  - name: Commits
+    description: Commit lifecycle — create transaction, stage changes, finalize
+  - name: History
+    description: Log, blame, and revision history operations
+  - name: Branches
+    description: Branch and tag management via COPY operations
+  - name: Properties
+    description: Versioned property management on files and directories
+  - name: Locks
+    description: Pessimistic locking for exclusive file editing
+
+paths:
+
+  /:
+    get:
+      operationId: getRepositoryRoot
+      summary: Get Repository Root
+      description: >-
+        Retrieve the repository root listing. Returns an HTML or XML directory
+        listing of the repository HEAD revision.
+      tags:
+        - Repository
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+            default: text/html
+      responses:
+        '200':
+          description: Repository root listing
+          content:
+            text/html:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+
+  /{path}:
+    get:
+      operationId: getFileOrDirectory
+      summary: Get File or Directory
+      description: >-
+        Retrieve the content of a file or a directory listing at the given path
+        in the HEAD revision (or the revision specified via Accept-Header or
+        a DAV: header).
+      tags:
+        - Files
+      parameters:
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Path to the file or directory within the repository
+        - name: p
+          in: query
+          schema:
+            type: integer
+          description: Peg revision number
+      responses:
+        '200':
+          description: File content or directory listing
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Path not found in the repository
+
+    put:
+      operationId: putFile
+      summary: Upload File Content
+      description: >-
+        Upload file content as part of an active commit transaction. The working
+        resource URL is obtained from a prior CHECKOUT response. Requires an
+        active MKACTIVITY transaction.
+      tags:
+        - Commits
+      parameters:
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-SVN-Base-Fulltext-MD5
+          in: header
+          schema:
+            type: string
+          description: MD5 checksum of the base file for delta validation
+        - name: X-SVN-Result-Fulltext-MD5
+          in: header
+          schema:
+            type: string
+          description: Expected MD5 checksum of the resulting file
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '204':
+          description: File content updated successfully
+        '403':
+          description: Forbidden — not inside an active transaction
+
+    delete:
+      operationId: deleteFileOrDirectory
+      summary: Delete File or Directory
+      description: >-
+        Delete a file or directory as part of an active commit transaction.
+        The resource is scheduled for deletion and removed on MERGE.
+      tags:
+        - Commits
+      parameters:
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Resource deleted from transaction
+        '404':
+          description: Path not found
+
+  /$svn/act/:
+    post:
+      operationId: createCommitTransaction
+      summary: Create Commit Transaction
+      description: >-
+        MKACTIVITY — creates a new commit transaction (activity) on the server.
+        Returns a URL to the activity resource used in subsequent CHECKOUT and
+        MERGE requests. This is the first step of every SVN commit.
+      tags:
+        - Commits
+      parameters:
+        - name: X-SVN-Options
+          in: header
+          schema:
+            type: string
+            default: lock-break
+      responses:
+        '201':
+          description: Activity (transaction) created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: URL of the created activity resource
+        '403':
+          description: Repository is read-only or user lacks commit permission
+
+  /$svn/act/{txn-id}:
+    delete:
+      operationId: abortCommitTransaction
+      summary: Abort Commit Transaction
+      description: >-
+        Abort an in-progress commit transaction by deleting the activity resource.
+        This rolls back all staged changes.
+      tags:
+        - Commits
+      parameters:
+        - name: txn-id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Transaction ID from MKACTIVITY
+      responses:
+        '204':
+          description: Transaction aborted
+        '404':
+          description: Transaction not found
+
+  /{path}?p={rev}:
+    get:
+      operationId: getFileAtRevision
+      summary: Get File at Specific Revision
+      description: >-
+        Retrieve file content or directory listing at a specific revision using
+        the peg revision query parameter.
+      tags:
+        - Files
+        - History
+      parameters:
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: p
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Revision number
+      responses:
+        '200':
+          description: File content at the specified revision
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
+  /!svn/rvr/{revision}/{path}:
+    get:
+      operationId: getRevisionVersionedResource
+      summary: Get Versioned Resource at Revision
+      description: >-
+        Retrieve the content of a file at an exact historical revision via the
+        Subversion versioned resource URL scheme.
+      tags:
+        - History
+      parameters:
+        - name: revision
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Revision number (integer)
+        - name: path
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Repository path
+      responses:
+        '200':
+          description: File content at revision
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Path not found at revision
+
+components:
+  schemas:
+    RepositoryInfo:
+      type: object
+      description: Metadata about a Subversion repository
+      properties:
+        uuid:
+          type: string
+          description: Repository UUID
+        root:
+          type: string
+          format: uri
+          description: Repository root URL
+        revision:
+          type: integer
+          description: Latest (HEAD) revision number
+
+    ResourceProperties:
+      type: object
+      description: WebDAV properties on a Subversion resource
+      properties:
+        checked-in:
+          type: string
+          description: DAV:checked-in — URL of the version resource for HEAD
+        version-name:
+          type: string
+          description: DAV:version-name — revision number as string
+        creator-displayname:
+          type: string
+          description: DAV:creator-displayname — last commit author
+        creationdate:
+          type: string
+          format: date-time
+          description: DAV:creationdate — date of last commit
+        getlastmodified:
+          type: string
+          format: date-time
+          description: DAV:getlastmodified
+        getcontentlength:
+          type: integer
+          description: DAV:getcontentlength — file size in bytes
+        getcontenttype:
+          type: string
+          description: DAV:getcontenttype — MIME type
+        svn:entry:committed-rev:
+          type: integer
+          description: SVN property — last committed revision
+        svn:entry:committed-date:
+          type: string
+          format: date-time
+        svn:entry:last-author:
+          type: string
+
+    LockInfo:
+      type: object
+      description: Information about a WebDAV lock on a Subversion resource
+      properties:
+        locktoken:
+          type: string
+          description: The opaque lock token (UUID)
+        owner:
+          type: string
+          description: Username that holds the lock
+        comment:
+          type: string
+          description: Optional lock comment
+        creationdate:
+          type: string
+          format: date-time
+        expirydate:
+          type: string
+          format: date-time
+          description: Lock expiry (null if indefinite)
+
+    CommitInfo:
+      type: object
+      description: Information returned after a successful commit MERGE
+      properties:
+        revision:
+          type: integer
+          description: New revision number created by the commit
+        author:
+          type: string
+          description: Author of the commit
+        date:
+          type: string
+          format: date-time
+          description: Commit timestamp
+        postCommitError:
+          type: string
+          description: Any post-commit hook error messages
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication for SVN repository access
+    digestAuth:
+      type: http
+      scheme: digest
+      description: HTTP Digest authentication for SVN repository access
+
+security:
+  - basicAuth: []

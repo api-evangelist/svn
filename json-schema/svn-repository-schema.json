@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/svn/json-schema/svn-repository-schema.json",
+  "title": "SVN Repository",
+  "description": "Schema representing an Apache Subversion repository and its resources.",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "description": "Unique identifier for the repository, assigned at creation time."
+    },
+    "root": {
+      "type": "string",
+      "format": "uri",
+      "description": "The canonical root URL of the repository."
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The current HEAD (latest) revision number."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable repository name."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["fsfs", "bdb", "svn-ng"],
+      "description": "Repository backend storage format."
+    }
+  },
+  "required": ["uuid", "root", "revision"]
+}
