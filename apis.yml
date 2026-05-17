@@ -72,7 +72,7 @@ apis:
     properties:
       - type: Documentation
         url: https://subversion.apache.org/docs/api/latest/
-      - type: GitHub Repository
+      - type: GitHubRepository
         url: https://github.com/apache/subversion
 
   - aid: svn:svn-python-bindings
@@ -103,7 +103,7 @@ apis:
         url: https://svnkit.com/index.html
 
 common:
-  - type: Getting Started
+  - type: GettingStarted
     url: https://subversion.apache.org/quick-start
   - type: Book
     url: https://svnbook.red-bean.com/
