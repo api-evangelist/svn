@@ -1,0 +1,135 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SVN WebDAV HTTP API — Files
+  description: 'SVN WebDAV HTTP API — Files. 2 operations. Lead operation: Get File or Directory. Self-contained Naftiko capability
+    covering one Svn business surface.'
+  tags:
+  - Svn
+  - Files
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SVN_API_KEY: SVN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: webdav-files
+    baseUri: https://svn.example.com/repos/{repository}
+    description: SVN WebDAV HTTP API — Files business capability. Self-contained, no shared references.
+    resources:
+    - name: path
+      path: /{path}
+      operations:
+      - name: getfileordirectory
+        method: GET
+        description: Get File or Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          description: Path to the file or directory within the repository
+          required: true
+        - name: p
+          in: query
+          type: integer
+          description: Peg revision number
+    - name: path}?p={rev
+      path: /{path}?p={rev}
+      operations:
+      - name: getfileatrevision
+        method: GET
+        description: Get File at Specific Revision
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+        - name: p
+          in: query
+          type: integer
+          description: Revision number
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.SVN_USER}}'
+      password: '{{env.SVN_PASS}}'
+  exposes:
+  - type: rest
+    namespace: webdav-files-rest
+    port: 8080
+    description: REST adapter for SVN WebDAV HTTP API — Files. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/{path}
+      name: path
+      description: REST surface for path.
+      operations:
+      - method: GET
+        name: getfileordirectory
+        description: Get File or Directory
+        call: webdav-files.getfileordirectory
+        with:
+          path: rest.path
+          p: rest.p
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{path-p-rev}
+      name: path-p-rev
+      description: REST surface for path}?p={rev.
+      operations:
+      - method: GET
+        name: getfileatrevision
+        description: Get File at Specific Revision
+        call: webdav-files.getfileatrevision
+        with:
+          path: rest.path
+          p: rest.p
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: webdav-files-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SVN WebDAV HTTP API — Files. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-file-directory
+      description: Get File or Directory
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: webdav-files.getfileordirectory
+      with:
+        path: tools.path
+        p: tools.p
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-file-specific-revision
+      description: Get File at Specific Revision
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: webdav-files.getfileatrevision
+      with:
+        path: tools.path
+        p: tools.p
+      outputParameters:
+      - type: object
+        mapping: $.

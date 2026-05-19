@@ -1,0 +1,215 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SVN WebDAV HTTP API — Commits
+  description: 'SVN WebDAV HTTP API — Commits. 4 operations. Lead operation: Create Commit Transaction. Self-contained Naftiko
+    capability covering one Svn business surface.'
+  tags:
+  - Svn
+  - Commits
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SVN_API_KEY: SVN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: webdav-commits
+    baseUri: https://svn.example.com/repos/{repository}
+    description: SVN WebDAV HTTP API — Commits business capability. Self-contained, no shared references.
+    resources:
+    - name: $svn-act
+      path: /$svn/act/
+      operations:
+      - name: createcommittransaction
+        method: POST
+        description: Create Commit Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-SVN-Options
+          in: header
+          type: string
+    - name: $svn-act-txn-id
+      path: /$svn/act/{txn-id}
+      operations:
+      - name: abortcommittransaction
+        method: DELETE
+        description: Abort Commit Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: txn-id
+          in: path
+          type: string
+          description: Transaction ID from MKACTIVITY
+          required: true
+    - name: path
+      path: /{path}
+      operations:
+      - name: putfile
+        method: PUT
+        description: Upload File Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+        - name: X-SVN-Base-Fulltext-MD5
+          in: header
+          type: string
+          description: MD5 checksum of the base file for delta validation
+        - name: X-SVN-Result-Fulltext-MD5
+          in: header
+          type: string
+          description: Expected MD5 checksum of the resulting file
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletefileordirectory
+        method: DELETE
+        description: Delete File or Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.SVN_USER}}'
+      password: '{{env.SVN_PASS}}'
+  exposes:
+  - type: rest
+    namespace: webdav-commits-rest
+    port: 8080
+    description: REST adapter for SVN WebDAV HTTP API — Commits. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/svn/act
+      name: svn-act
+      description: REST surface for $svn-act.
+      operations:
+      - method: POST
+        name: createcommittransaction
+        description: Create Commit Transaction
+        call: webdav-commits.createcommittransaction
+        with:
+          X-SVN-Options: rest.X-SVN-Options
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/svn/act/{txn-id}
+      name: svn-act-txn-id
+      description: REST surface for $svn-act-txn-id.
+      operations:
+      - method: DELETE
+        name: abortcommittransaction
+        description: Abort Commit Transaction
+        call: webdav-commits.abortcommittransaction
+        with:
+          txn-id: rest.txn-id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/{path}
+      name: path
+      description: REST surface for path.
+      operations:
+      - method: PUT
+        name: putfile
+        description: Upload File Content
+        call: webdav-commits.putfile
+        with:
+          path: rest.path
+          X-SVN-Base-Fulltext-MD5: rest.X-SVN-Base-Fulltext-MD5
+          X-SVN-Result-Fulltext-MD5: rest.X-SVN-Result-Fulltext-MD5
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletefileordirectory
+        description: Delete File or Directory
+        call: webdav-commits.deletefileordirectory
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: webdav-commits-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SVN WebDAV HTTP API — Commits. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-commit-transaction
+      description: Create Commit Transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: webdav-commits.createcommittransaction
+      with:
+        X-SVN-Options: tools.X-SVN-Options
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: abort-commit-transaction
+      description: Abort Commit Transaction
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: webdav-commits.abortcommittransaction
+      with:
+        txn-id: tools.txn-id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-file-content
+      description: Upload File Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: webdav-commits.putfile
+      with:
+        path: tools.path
+        X-SVN-Base-Fulltext-MD5: tools.X-SVN-Base-Fulltext-MD5
+        X-SVN-Result-Fulltext-MD5: tools.X-SVN-Result-Fulltext-MD5
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-file-directory
+      description: Delete File or Directory
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: webdav-commits.deletefileordirectory
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
