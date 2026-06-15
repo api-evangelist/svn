@@ -1,0 +1,1471 @@
+{
+  "item": [
+    {
+      "id": "eed11ed0-0047-44ef-a7db-a01afcd6804c",
+      "name": "Repository",
+      "description": {
+        "content": "Repository root and metadata operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "846b1c2a-51d2-4459-949a-483ab59210e1",
+          "name": "Get Repository Root",
+          "request": {
+            "name": "Get Repository Root",
+            "description": {
+              "content": "Retrieve the repository root listing. Returns an HTML or XML directory listing of the repository HEAD revision.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "274f45dd-c6d7-4baf-b148-83510ff937f2",
+              "name": "Repository root listing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "text/html",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "46f337f7-e6fc-43d5-b359-55048c9a991c",
+      "name": "Files",
+      "description": {
+        "content": "File and directory content retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ec90437-23e0-4ac2-9aa7-0346f4df1066",
+          "name": "Get File or Directory",
+          "request": {
+            "name": "Get File or Directory",
+            "description": {
+              "content": "Retrieve the content of a file or a directory listing at the given path in the HEAD revision (or the revision specified via Accept-Header or a DAV: header).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "p",
+                  "value": "<integer>",
+                  "description": "Peg revision number"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) Path to the file or directory within the repository"
+                },
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbaf6d4a-7ad9-48b6-8473-d82980c708e1",
+              "name": "File content or directory listing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Path to the file or directory within the repository"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "796d6ec2-9c7e-45cd-a7a1-f57c6d27d418",
+              "name": "Path not found in the repository",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Path to the file or directory within the repository"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d15db836-a54a-402c-94c2-fcf9c82b03cd",
+          "name": "Get File at Specific Revision",
+          "request": {
+            "name": "Get File at Specific Revision",
+            "description": {
+              "content": "Retrieve file content or directory listing at a specific revision using the peg revision query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{path}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "p",
+                  "value": "{{rev}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "p",
+                  "value": "<integer>",
+                  "description": "(Required) Revision number"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b920a8ce-7928-4d3b-aee7-95cae0cc654c",
+              "name": "File content at the specified revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{path}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a8bb2774-b955-44af-aac1-9604262f9d7a",
+      "name": "Commits",
+      "description": {
+        "content": "Commit lifecycle — create transaction, stage changes, finalize",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5e3f7b5-5349-4246-9569-00b414a0b775",
+          "name": "Upload File Content",
+          "request": {
+            "name": "Upload File Content",
+            "description": {
+              "content": "Upload file content as part of an active commit transaction. The working resource URL is obtained from a prior CHECKOUT response. Requires an active MKACTIVITY transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "MD5 checksum of the base file for delta validation",
+                "key": "X-SVN-Base-Fulltext-MD5",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Expected MD5 checksum of the resulting file",
+                "key": "X-SVN-Result-Fulltext-MD5",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "6bdc0511-c8ee-46e2-9d66-2597405e6b8f",
+              "name": "File content updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "MD5 checksum of the base file for delta validation",
+                    "key": "X-SVN-Base-Fulltext-MD5",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Expected MD5 checksum of the resulting file",
+                    "key": "X-SVN-Result-Fulltext-MD5",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab5d2ce8-2519-4295-8c51-82e095230f56",
+              "name": "Forbidden — not inside an active transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "MD5 checksum of the base file for delta validation",
+                    "key": "X-SVN-Base-Fulltext-MD5",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Expected MD5 checksum of the resulting file",
+                    "key": "X-SVN-Result-Fulltext-MD5",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4117535-74bf-4715-8ad9-319ec009dc2e",
+          "name": "Delete File or Directory",
+          "request": {
+            "name": "Delete File or Directory",
+            "description": {
+              "content": "Delete a file or directory as part of an active commit transaction. The resource is scheduled for deletion and removed on MERGE.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ca8cd47-5719-4d7b-9da4-e8c94c580949",
+              "name": "Resource deleted from transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6513c921-b487-411c-beff-048128ef916d",
+              "name": "Path not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "307e8e34-b3a6-4d0c-95fa-8a0bdabd2cd2",
+          "name": "Create Commit Transaction",
+          "request": {
+            "name": "Create Commit Transaction",
+            "description": {
+              "content": "MKACTIVITY — creates a new commit transaction (activity) on the server. Returns a URL to the activity resource used in subsequent CHECKOUT and MERGE requests. This is the first step of every SVN commit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "$svn",
+                "act",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "X-SVN-Options",
+                "value": "lock-break",
+                "description": ""
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cf9f77d-4387-4ad9-ad56-99fb531e0d64",
+              "name": "Activity (transaction) created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "$svn",
+                    "act",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-SVN-Options",
+                    "value": "lock-break",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URL of the created activity resource",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89b43861-3898-495c-826c-4cee8a32bfa5",
+              "name": "Repository is read-only or user lacks commit permission",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "$svn",
+                    "act",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-SVN-Options",
+                    "value": "lock-break",
+                    "description": ""
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "feb927a7-a4b9-46eb-a360-b9147746daf7",
+          "name": "Abort Commit Transaction",
+          "request": {
+            "name": "Abort Commit Transaction",
+            "description": {
+              "content": "Abort an in-progress commit transaction by deleting the activity resource. This rolls back all staged changes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "$svn",
+                "act",
+                ":txn-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "txn-id",
+                  "description": "(Required) Transaction ID from MKACTIVITY"
+                },
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7bb490d-298e-42cd-a574-d7a47d7f4c66",
+              "name": "Transaction aborted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "$svn",
+                    "act",
+                    ":txn-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txn-id",
+                      "description": "(Required) Transaction ID from MKACTIVITY"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf7cad11-526f-4917-b82e-c0fd1270f13b",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "$svn",
+                    "act",
+                    ":txn-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "txn-id",
+                      "description": "(Required) Transaction ID from MKACTIVITY"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "42a0268c-1f8f-4a4a-ab67-2973ff49f5cd",
+      "name": "History",
+      "description": {
+        "content": "Log, blame, and revision history operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "179c9f96-edab-4f05-84a9-1f552682640f",
+          "name": "Get File at Specific Revision",
+          "request": {
+            "name": "Get File at Specific Revision",
+            "description": {
+              "content": "Retrieve file content or directory listing at a specific revision using the peg revision query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{path}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "p",
+                  "value": "{{rev}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "p",
+                  "value": "<integer>",
+                  "description": "(Required) Revision number"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c39aed69-4381-415e-83d1-d71c14e16008",
+              "name": "File content at the specified revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{path}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8b084fe-6c1e-4eab-806c-9690a0cfa297",
+          "name": "Get Versioned Resource at Revision",
+          "request": {
+            "name": "Get Versioned Resource at Revision",
+            "description": {
+              "content": "Retrieve the content of a file at an exact historical revision via the Subversion versioned resource URL scheme.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "!svn",
+                "rvr",
+                ":revision",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "revision",
+                  "description": "(Required) Revision number (integer)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) Repository path"
+                },
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21d18f45-2711-4667-9833-2c775fde28a5",
+              "name": "File content at revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "!svn",
+                    "rvr",
+                    ":revision",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "revision",
+                      "description": "(Required) Revision number (integer)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Repository path"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd7c756a-dfc9-40ea-ab3e-225c037d9058",
+              "name": "Path not found at revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "!svn",
+                    "rvr",
+                    ":revision",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "revision",
+                      "description": "(Required) Revision number (integer)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Repository path"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "390637ba-d36c-497e-a9f2-802de514697b",
+      "name": "Branches",
+      "description": {
+        "content": "Branch and tag management via COPY operations",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "07b93759-38ed-4603-b260-ba64fc51a74a",
+      "name": "Properties",
+      "description": {
+        "content": "Versioned property management on files and directories",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "e0444cba-d2f7-45ea-ac23-d89a5b962de8",
+      "name": "Locks",
+      "description": {
+        "content": "Pessimistic locking for exclusive file editing",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Repository name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myproject",
+      "key": "repository"
+    },
+    {
+      "type": "string",
+      "value": "https://svn.example.com/repos/{{repository}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "path"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a00bc68a-9ccf-4934-a3d1-0021dd99e510",
+    "name": "SVN WebDAV HTTP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apache Subversion repository access via the WebDAV/DeltaV protocol served by mod_dav_svn. Clients perform version control operations — checkout, update, commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).\n\nContact Support:\n Name: Apache Subversion\n Email: users@subversion.apache.org",
+      "type": "text/plain"
+    }
+  }
+}

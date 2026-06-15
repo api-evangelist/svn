@@ -1,0 +1,222 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SVN WebDAV HTTP API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Repository",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Repository Root",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the repository root listing. Returns an HTML or XML directory listing of the repository HEAD revision."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get File or Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Path to the file or directory within the repository"
+              },
+              {
+                "name": "p",
+                "value": "",
+                "type": "query",
+                "description": "Peg revision number"
+              }
+            ]
+          },
+          "docs": "Retrieve the content of a file or a directory listing at the given path in the HEAD revision (or the revision specified via Accept-Header or a DAV: header)."
+        },
+        {
+          "info": {
+            "name": "Get File at Specific Revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/:path?p=:rev",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "p",
+                "value": "",
+                "type": "query",
+                "description": "Revision number"
+              }
+            ]
+          },
+          "docs": "Retrieve file content or directory listing at a specific revision using the peg revision query parameter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Commits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload File Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://svn.example.com/repos/{repository}/:path",
+            "headers": [
+              {
+                "name": "X-SVN-Base-Fulltext-MD5",
+                "value": ""
+              },
+              {
+                "name": "X-SVN-Result-Fulltext-MD5",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upload file content as part of an active commit transaction. The working resource URL is obtained from a prior CHECKOUT response. Requires an active MKACTIVITY transaction."
+        },
+        {
+          "info": {
+            "name": "Delete File or Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://svn.example.com/repos/{repository}/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a file or directory as part of an active commit transaction. The resource is scheduled for deletion and removed on MERGE."
+        },
+        {
+          "info": {
+            "name": "Create Commit Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://svn.example.com/repos/{repository}/$svn/act/",
+            "headers": [
+              {
+                "name": "X-SVN-Options",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "MKACTIVITY — creates a new commit transaction (activity) on the server. Returns a URL to the activity resource used in subsequent CHECKOUT and MERGE requests. This is the first step of every SVN commit."
+        },
+        {
+          "info": {
+            "name": "Abort Commit Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://svn.example.com/repos/{repository}/$svn/act/:txn-id",
+            "params": [
+              {
+                "name": "txn-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID from MKACTIVITY"
+              }
+            ]
+          },
+          "docs": "Abort an in-progress commit transaction by deleting the activity resource. This rolls back all staged changes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Versioned Resource at Revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/!svn/rvr/:revision/:path",
+            "params": [
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "Revision number (integer)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Repository path"
+              }
+            ]
+          },
+          "docs": "Retrieve the content of a file at an exact historical revision via the Subversion versioned resource URL scheme."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
