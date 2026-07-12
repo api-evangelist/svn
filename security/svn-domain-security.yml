@@ -1,0 +1,39 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: subversion.apache.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 24 23:33:10 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: pysvn.sourceforge.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 26 03:36:56 2026 GMT
+  hsts: false
+- host: svnkit.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Oct  4 19:19:11 2026 GMT
+  hsts: false
+domains:
+- domain: apache.org
+  dnssec: false
+  caa:
+  - 0 iodef "mailto:root@apache.org"
+  - 0 issue "globalsign.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "sectigo.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: sourceforge.io
+  dnssec: false
+  caa:
+  - 0 issue "letsencrypt.org"
+  - 0 issue "geotrust.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

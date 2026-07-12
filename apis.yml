@@ -95,6 +95,12 @@ apis:
       - type: Documentation
         url: https://svnkit.com/index.html
 common:
+  - type: VulnerabilityDisclosure
+    url: security/svn-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/svn-domain-security.yml
+  - type: Authentication
+    url: authentication/svn-authentication.yml
   - type: GettingStarted
     url: https://subversion.apache.org/quick-start
   - type: Book

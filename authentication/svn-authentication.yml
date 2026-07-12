@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/svn-webdav-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication for SVN repository access
+  sources:
+  - openapi/svn-webdav-openapi.yml
+- name: digestAuth
+  type: http
+  scheme: digest
+  description: HTTP Digest authentication for SVN repository access
+  sources:
+  - openapi/svn-webdav-openapi.yml
