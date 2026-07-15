@@ -95,6 +95,8 @@ apis:
       - type: Documentation
         url: https://svnkit.com/index.html
 common:
+  - type: AgenticAccess
+    url: agentic-access/svn-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/svn-vulnerability-disclosure.yml
   - type: DomainSecurity
