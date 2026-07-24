@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: SVN WebDAV HTTP Commits History API
+  description: Apache Subversion repository access via the WebDAV/DeltaV protocol served by mod_dav_svn. Clients perform version control operations — checkout, update, commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).
+  version: 1.0.0
+  contact:
+    name: Apache Subversion
+    url: https://subversion.apache.org/
+    email: users@subversion.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://subversion.apache.org/images/svn-square.jpg
+servers:
+- url: https://svn.example.com/repos/{repository}
+  description: Subversion repository served via mod_dav_svn
+  variables:
+    repository:
+      default: myproject
+      description: Repository name
+security:
+- basicAuth: []
+tags:
+- name: History
+  description: Log, blame, and revision history operations
+paths:
+  /{path}?p={rev}:
+    get:
+      operationId: getFileAtRevision
+      summary: Get File at Specific Revision
+      description: Retrieve file content or directory listing at a specific revision using the peg revision query parameter.
+      tags:
+      - History
+      parameters:
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: p
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Revision number
+      responses:
+        '200':
+          description: File content at the specified revision
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /!svn/rvr/{revision}/{path}:
+    get:
+      operationId: getRevisionVersionedResource
+      summary: Get Versioned Resource at Revision
+      description: Retrieve the content of a file at an exact historical revision via the Subversion versioned resource URL scheme.
+      tags:
+      - History
+      parameters:
+      - name: revision
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Revision number (integer)
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Repository path
+      responses:
+        '200':
+          description: File content at revision
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Path not found at revision
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication for SVN repository access
+    digestAuth:
+      type: http
+      scheme: digest
+      description: HTTP Digest authentication for SVN repository access

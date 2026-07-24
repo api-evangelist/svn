@@ -1,0 +1,60 @@
+openapi: 3.1.0
+info:
+  title: SVN WebDAV HTTP Commits Repository API
+  description: Apache Subversion repository access via the WebDAV/DeltaV protocol served by mod_dav_svn. Clients perform version control operations — checkout, update, commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).
+  version: 1.0.0
+  contact:
+    name: Apache Subversion
+    url: https://subversion.apache.org/
+    email: users@subversion.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://subversion.apache.org/images/svn-square.jpg
+servers:
+- url: https://svn.example.com/repos/{repository}
+  description: Subversion repository served via mod_dav_svn
+  variables:
+    repository:
+      default: myproject
+      description: Repository name
+security:
+- basicAuth: []
+tags:
+- name: Repository
+  description: Repository root and metadata operations
+paths:
+  /:
+    get:
+      operationId: getRepositoryRoot
+      summary: Get Repository Root
+      description: Retrieve the repository root listing. Returns an HTML or XML directory listing of the repository HEAD revision.
+      tags:
+      - Repository
+      parameters:
+      - name: Accept
+        in: header
+        schema:
+          type: string
+          default: text/html
+      responses:
+        '200':
+          description: Repository root listing
+          content:
+            text/html:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication for SVN repository access
+    digestAuth:
+      type: http
+      scheme: digest
+      description: HTTP Digest authentication for SVN repository access
