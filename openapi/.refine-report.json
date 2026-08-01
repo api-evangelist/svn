@@ -1,0 +1,20 @@
+{
+  "provider": "svn",
+  "sources": [
+    "svn-commits-api-openapi.yml",
+    "svn-files-api-openapi.yml",
+    "svn-history-api-openapi.yml",
+    "svn-repository-api-openapi.yml"
+  ],
+  "outputs": [
+    "svn-commits-api-openapi.yml",
+    "svn-files-api-openapi.yml",
+    "svn-history-api-openapi.yml",
+    "svn-repository-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
