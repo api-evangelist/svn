@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SVN WebDAV HTTP Commits History API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get File at Specific Revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/:path?p=:rev",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "p",
+                "value": "",
+                "type": "query",
+                "description": "Revision number"
+              }
+            ]
+          },
+          "docs": "Retrieve file content or directory listing at a specific revision using the peg revision query parameter."
+        },
+        {
+          "info": {
+            "name": "Get Versioned Resource at Revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/!svn/rvr/:revision/:path",
+            "params": [
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "Revision number (integer)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Repository path"
+              }
+            ]
+          },
+          "docs": "Retrieve the content of a file at an exact historical revision via the Subversion versioned resource URL scheme."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

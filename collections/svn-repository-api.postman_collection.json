@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "9ba5a2d2-2b52-4929-ba28-0036eb280cf4",
+      "name": "Repository",
+      "description": {
+        "content": "Repository root and metadata operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "14cf16ba-8494-4132-9e20-d16003b67fe3",
+          "name": "Get Repository Root",
+          "request": {
+            "name": "Get Repository Root",
+            "description": {
+              "content": "Retrieve the repository root listing. Returns an HTML or XML directory listing of the repository HEAD revision.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cdb88ce4-55de-418f-b28b-f0b5e710f517",
+              "name": "Repository root listing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "text/html",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Repository name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myproject",
+      "key": "repository"
+    },
+    {
+      "type": "string",
+      "value": "https://svn.example.com/repos/{{repository}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d0c19349-e042-47fe-94f8-3f5e96e29bd3",
+    "name": "SVN WebDAV HTTP Commits Repository API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apache Subversion repository access via the WebDAV/DeltaV protocol served by mod_dav_svn. Clients perform version control operations — checkout, update, commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).\n\nContact Support:\n Name: Apache Subversion\n Email: users@subversion.apache.org",
+      "type": "text/plain"
+    }
+  }
+}

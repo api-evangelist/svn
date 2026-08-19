@@ -1,0 +1,361 @@
+{
+  "item": [
+    {
+      "id": "91ad6ded-9139-465f-86cd-c0e6fb3b74c5",
+      "name": "History",
+      "description": {
+        "content": "Log, blame, and revision history operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "810fb054-8f75-4e9d-9038-75e5dcf9c690",
+          "name": "Get File at Specific Revision",
+          "request": {
+            "name": "Get File at Specific Revision",
+            "description": {
+              "content": "Retrieve file content or directory listing at a specific revision using the peg revision query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{path}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "p",
+                  "value": "{{rev}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "p",
+                  "value": "<integer>",
+                  "description": "(Required) Revision number"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4960e75f-f30d-4a2c-aadc-14c3b269eed7",
+              "name": "File content at the specified revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{path}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27e7fb2d-b3e0-4f13-96de-1a6fd175d446",
+          "name": "Get Versioned Resource at Revision",
+          "request": {
+            "name": "Get Versioned Resource at Revision",
+            "description": {
+              "content": "Retrieve the content of a file at an exact historical revision via the Subversion versioned resource URL scheme.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "!svn",
+                "rvr",
+                ":revision",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "revision",
+                  "description": "(Required) Revision number (integer)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) Repository path"
+                },
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42bcba3f-4bdd-4080-bd72-898002830efe",
+              "name": "File content at revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "!svn",
+                    "rvr",
+                    ":revision",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "revision",
+                      "description": "(Required) Revision number (integer)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Repository path"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b22b1a1f-cb02-4fe4-8b38-0677e72a0500",
+              "name": "Path not found at revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "!svn",
+                    "rvr",
+                    ":revision",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "revision",
+                      "description": "(Required) Revision number (integer)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Repository path"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Repository name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myproject",
+      "key": "repository"
+    },
+    {
+      "type": "string",
+      "value": "https://svn.example.com/repos/{{repository}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "path"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0d1ceb85-8aa2-4524-908a-f3a85cf48715",
+    "name": "SVN WebDAV HTTP Commits History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apache Subversion repository access via the WebDAV/DeltaV protocol served by mod_dav_svn. Clients perform version control operations — checkout, update, commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).\n\nContact Support:\n Name: Apache Subversion\n Email: users@subversion.apache.org",
+      "type": "text/plain"
+    }
+  }
+}

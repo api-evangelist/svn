@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SVN WebDAV HTTP Commits Files API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get File or Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Path to the file or directory within the repository"
+              },
+              {
+                "name": "p",
+                "value": "",
+                "type": "query",
+                "description": "Peg revision number"
+              }
+            ]
+          },
+          "docs": "Retrieve the content of a file or a directory listing at the given path in the HEAD revision (or the revision specified via Accept-Header or a DAV: header)."
+        },
+        {
+          "info": {
+            "name": "Get File at Specific Revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/:path?p=:rev",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "p",
+                "value": "",
+                "type": "query",
+                "description": "Revision number"
+              }
+            ]
+          },
+          "docs": "Retrieve file content or directory listing at a specific revision using the peg revision query parameter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

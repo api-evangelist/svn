@@ -1,0 +1,348 @@
+{
+  "item": [
+    {
+      "id": "bd81efb0-8c1d-45e0-a1bd-f65aaec9bff6",
+      "name": "Files",
+      "description": {
+        "content": "File and directory content retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb30293d-b29b-4774-bdc4-0a0fd5eea53a",
+          "name": "Get File or Directory",
+          "request": {
+            "name": "Get File or Directory",
+            "description": {
+              "content": "Retrieve the content of a file or a directory listing at the given path in the HEAD revision (or the revision specified via Accept-Header or a DAV: header).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "p",
+                  "value": "<integer>",
+                  "description": "Peg revision number"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) Path to the file or directory within the repository"
+                },
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e013df7-af34-4f37-97ad-5088fcef1b46",
+              "name": "File content or directory listing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Path to the file or directory within the repository"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11e57fcb-5719-43d6-a100-65fdf03018b3",
+              "name": "Path not found in the repository",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) Path to the file or directory within the repository"
+                    },
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82e50047-f372-4c2c-a525-fce1a3493942",
+          "name": "Get File at Specific Revision",
+          "request": {
+            "name": "Get File at Specific Revision",
+            "description": {
+              "content": "Retrieve file content or directory listing at a specific revision using the peg revision query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "{{path}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "p",
+                  "value": "{{rev}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "p",
+                  "value": "<integer>",
+                  "description": "(Required) Revision number"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Repository name",
+                  "type": "any",
+                  "value": "{{repository}}",
+                  "key": "repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9d0a4a5-6932-43f9-87af-3587fabad6d8",
+              "name": "File content at the specified revision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "{{path}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "p",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Repository name",
+                      "type": "any",
+                      "value": "{{repository}}",
+                      "key": "repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Repository name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myproject",
+      "key": "repository"
+    },
+    {
+      "type": "string",
+      "value": "https://svn.example.com/repos/{{repository}}",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "path"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cbf0e76f-c1f4-434d-8f51-a81f6a2d7319",
+    "name": "SVN WebDAV HTTP Commits Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Apache Subversion repository access via the WebDAV/DeltaV protocol served by mod_dav_svn. Clients perform version control operations — checkout, update, commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).\n\nContact Support:\n Name: Apache Subversion\n Email: users@subversion.apache.org",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SVN WebDAV HTTP Commits Repository API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Repository",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Repository Root",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://svn.example.com/repos/{repository}/",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the repository root listing. Returns an HTML or XML directory listing of the repository HEAD revision."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
