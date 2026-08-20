@@ -22,6 +22,14 @@ accessModel:
 image: https://subversion.apache.org/images/svn-square.jpg
 tags:
   - Apache
+  - Open-Source
+  - Repository
+  - Source Control
+  - Svn
+  - Version Control
+  - WebDAV
+tags_raw:
+  - Apache
   - Open Source
   - Repository
   - Source Control
@@ -96,6 +104,8 @@ apis:
   humanURL: https://subversion.apache.org/docs/
   baseURL: https://svn.example.com/repos/
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
