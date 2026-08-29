@@ -6,6 +6,18 @@ description: >-
   handling. SVN is served over HTTP/HTTPS using the WebDAV/DeltaV protocol via mod_dav_svn, or over a custom protocol
   using svnserve.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -154,6 +166,10 @@ apis:
     url: >-
       https://svn.apache.org/repos/asf/subversion/trunk/notes/http-and-webdav/webdav-usage.html
 common:
+  - type: IssueTracker
+    url: https://github.com/apache/subversion/issues
+  - type: CodeOfConduct
+    url: https://github.com/apache/.github/blob/main/.github/CODE_OF_CONDUCT.md
   - type: AgenticAccess
     url: agentic-access/svn-agentic-access.yml
   - type: VulnerabilityDisclosure
