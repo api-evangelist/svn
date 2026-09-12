@@ -166,6 +166,8 @@ apis:
     url: >-
       https://svn.apache.org/repos/asf/subversion/trunk/notes/http-and-webdav/webdav-usage.html
 common:
+  - type: Website
+    url: https://www.apache.org/
   - type: IssueTracker
     url: https://github.com/apache/subversion/issues
   - type: CodeOfConduct
