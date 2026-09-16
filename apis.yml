@@ -36,7 +36,6 @@ accessModel:
 image: https://subversion.apache.org/images/svn-square.jpg
 tags:
   - Apache
-  - Developer Tools
   - Open-Source
   - Repository
   - Source Control
