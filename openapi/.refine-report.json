@@ -1,10 +1,7 @@
 {
   "provider": "svn",
   "sources": [
-    "svn-commits-api-openapi.yml",
-    "svn-files-api-openapi.yml",
-    "svn-history-api-openapi.yml",
-    "svn-repository-api-openapi.yml"
+    "_original/svn-webdav-openapi.yml"
   ],
   "outputs": [
     "svn-commits-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "svn-webdav-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "svn-commits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "svn-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "svn-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "svn-repository-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

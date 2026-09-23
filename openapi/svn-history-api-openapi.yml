@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SVN WebDAV HTTP Commits History API
+  title: SVN WebDAV HTTP History API
   description: Apache Subversion repository access via the WebDAV/DeltaV protocol served by mod_dav_svn. Clients perform version control operations — checkout, update, commit, log, diff, copy, delete — over standard HTTP/HTTPS using a combination of WebDAV methods (PROPFIND, REPORT, MKACTIVITY, CHECKOUT, MERGE) and standard HTTP methods (GET, PUT, DELETE, COPY, OPTIONS).
   version: 1.0.0
   contact:
