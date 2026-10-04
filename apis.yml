@@ -172,6 +172,9 @@ apis:
     url: >-
       https://svn.apache.org/repos/asf/subversion/trunk/notes/http-and-webdav/webdav-usage.html
 common:
+  - type: CapabilityMap
+    url: capabilities/svn-capability-edges.yml
+    name: Subversion Business Capability Map
   - type: Website
     url: https://www.apache.org/
   - type: IssueTracker

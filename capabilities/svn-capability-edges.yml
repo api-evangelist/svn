@@ -1,0 +1,43 @@
+slug: svn
+provider: Subversion
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Commits
+  spec_file: svn-commits-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.85
+  evidence: POST /$svn/act/ createCommitTransaction 'Create Commit Transaction'; 'Apache Subversion repository
+    access via the WebDAV/DeltaV protocol'
+  reason: Commit transaction creation/abort in a version control system is source-control practice, which
+    the frame places under Software Construction Management.
+- tag: Files
+  spec_file: svn-files-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.75
+  evidence: GET /{path}?p={rev} getFileAtRevision 'Get File at Specific Revision'
+  reason: Retrieving versioned file content from an SVN repository is source-control usage, i.e. software
+    construction practice; operations are read-only so slightly lower confidence.
+- tag: History
+  spec_file: svn-history-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.75
+  evidence: GET /!svn/rvr/{revision}/{path} getRevisionVersionedResource 'Get Versioned Resource at Revision'
+  reason: Revision history access in a centralized version control system is part of source-control discipline
+    under Software Construction Management.
