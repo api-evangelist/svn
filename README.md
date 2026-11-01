@@ -1,4 +1,4 @@
-# Subversion (svn)
+# Subversion
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,119 +66,164 @@
 
 Apache Subversion (SVN) is a centralized version control system that tracks changes to files and directories over time. It supports atomic commits, directory versioning, cheap branching and tagging, merge tracking, and binary file handling. SVN is served over HTTP/HTTPS using the WebDAV/DeltaV protocol via mod_dav_svn, or over a custom protocol using svnserve.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/svn/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/svn/refs/heads/main/apis.yml)
+**Areas:** Apache · Open Source · Repository · Version Control · Svn · WebDAV
 
-## Scope
+## Subversion on APIs.io
 
-- **Type:** Index
+Everything profiled for Subversion is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/svn/](https://apis.io/providers/svn/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Apache
-- Open Source
-- Repository
-- Source Control
-- Svn
-- Version Control
-- Webdav
+- [SVN C Library API](https://apis.io/apis/svn/svn-c-api/) — The Subversion C library provides the low-level API for building tools and integrations. It includes the libsvn_client, libsvn_ra, libsvn_wc, and…
+- [SVN Python Bindings](https://apis.io/apis/svn/svn-python-bindings/) — Python bindings for Subversion C libraries, providing access to client and repository operations via pysvn and the official svn.client Python module.
+- [SVNKit Java Library](https://apis.io/apis/svn/svn-java-bindings/) — SVNKit is a pure Java Subversion client library providing full access to Subversion repository and working copy data. Used by major IDE plugins including…
+- [Subversion Commits API](https://apis.io/apis/svn/svn-commits-api/) — Commit lifecycle — create transaction, stage changes, finalize
+- [Subversion Files API](https://apis.io/apis/svn/svn-files-api/) — File and directory content retrieval
+- [Subversion History API](https://apis.io/apis/svn/svn-history-api/) — Log, blame, and revision history operations
+- [Subversion Repository API](https://apis.io/apis/svn/svn-repository-api/) — Repository root and metadata operations
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### SVN WebDAV HTTP API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Apache Subversion exposes repository operations over HTTP/HTTPS using the WebDAV/DeltaV protocol via the mod_dav_svn Apache module. Clients use OPTIONS, PROPFIND, GET, PUT, REPORT, MKACTIVITY, CHECKOUT, MERGE, COPY, DELETE, and PROPPATCH to perform version control operations including checkout, commit, update, log retrieval, and branching.
+- [Svn Agentic Access](https://apis.io/agentic-access/svn/svn-agentic-access/)
 
-- **Human URL:** [https://subversion.apache.org/docs/](https://subversion.apache.org/docs/)
-- **Base URL:** `https://svn.example.com/repos/`
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- Deltav
-- Repository
-- Version Control
-- Webdav
+- [SVN Commit](https://apis.io/schemas/svn/svn-commit/)
+- [SVN Repository](https://apis.io/schemas/svn/svn-repository/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://subversion.apache.org/docs/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/svn/refs/heads/main/openapi/svn-webdav-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Book](https://svnbook.red-bean.com/)
-- [Protocol](https://svn.apache.org/repos/asf/subversion/trunk/notes/http-and-webdav/webdav-usage.html)
-- [Postman Collection](collections/svn-webdav.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/svn-webdav.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### SVN C Library API
+- [Svn Repository Structure](https://apis.io/json-structure/svn/svn-repository-structure/)
 
-The Subversion C library provides the low-level API for building tools and integrations. It includes the libsvn_client, libsvn_ra, libsvn_wc, and libsvn_repos libraries for client operations, repository access, working copy management, and server-side repository access respectively.
+#### JSON-LD (1)
 
-- **Human URL:** [https://subversion.apache.org/docs/api/latest/](https://subversion.apache.org/docs/api/latest/)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Svn Context](https://apis.io/jsonld/svn/svn-context/)
 
-- C Library
-- Integration
-- Library
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://subversion.apache.org/docs/api/latest/)
-- [GitHub Repository](https://github.com/apache/subversion)
-- [Postman Collection](collections/svn-webdav.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/svn-webdav.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Apache Subversion Vocabulary](https://apis.io/vocabularies/svn/svn-vocabulary/)
 
-### SVN Python Bindings
+#### Examples (2)
 
-Python bindings for Subversion C libraries, providing access to client and repository operations via pysvn and the official svn.client Python module.
+Example requests and responses.
 
-- **Human URL:** [https://pysvn.sourceforge.io/](https://pysvn.sourceforge.io/)
+- [Svn Commit Example](https://apis.io/examples/svn/svn-commit-example/)
+- [Svn Get File Example](https://apis.io/examples/svn/svn-get-file-example/)
 
-#### Tags
+#### Collections (5)
 
-- Python
-- SDK
+Postman and Open Collection request collections.
 
-#### Properties
+- [SVN WebDAV HTTP Commits API](https://apis.io/collections/svn/open-svn-commits-api/)
+- [SVN WebDAV HTTP Commits Files API](https://apis.io/collections/svn/open-svn-files-api/)
+- [SVN WebDAV HTTP Commits History API](https://apis.io/collections/svn/open-svn-history-api/)
+- [SVN WebDAV HTTP Commits Repository API](https://apis.io/collections/svn/open-svn-repository-api/)
+- [SVN WebDAV HTTP API](https://apis.io/collections/svn/open-svn-webdav/)
 
-- [Documentation](https://pysvn.sourceforge.io/Docs/pysvn_prog_guide.html)
-- [Postman Collection](collections/svn-webdav.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/svn-webdav.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-### SVNKit Java Library
+Spectral rulesets for the provider's contracts.
 
-SVNKit is a pure Java Subversion client library providing full access to Subversion repository and working copy data. Used by major IDE plugins including IntelliJ IDEA and Eclipse Subclipse.
+- [Subversion — jsonschema rules](https://apis.io/rules/svn/svn-jsonschema-spectral-rules/)
+- [Subversion API Rules](https://apis.io/rules/svn/svn-rules/)
 
-- **Human URL:** [https://svnkit.com/](https://svnkit.com/)
+#### Security (3)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Java
-- SDK
+- [Svn Authentication](https://apis.io/security/svn/svn-authentication/)
+- [Svn Domain Security](https://apis.io/security/svn/svn-domain-security/)
+- [Svn Vulnerability Disclosure](https://apis.io/security/svn/svn-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://svnkit.com/index.html)
-- [Postman Collection](collections/svn-webdav.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/svn-webdav.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-## Common Properties
+- [Svn Plans Pricing](https://apis.io/plans/svn/svn-plans-pricing/)
 
-- [Getting Started](https://subversion.apache.org/quick-start)
-- [Book](https://svnbook.red-bean.com/)
-- [Downloads](https://subversion.apache.org/download/)
+#### Rate limits (1)
+
+Published request limits.
+
+- [Svn Rate Limits](https://apis.io/rate-limits/svn/svn-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Svn Finops](https://apis.io/finops/svn/svn-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.apache.org/)
+- [Getting started](https://subversion.apache.org/quick-start)
 - [Security](https://subversion.apache.org/security/)
-- [F A Q](https://subversion.apache.org/faq.html)
-- [Community](https://subversion.apache.org/mailing-lists.html)
-- [Git Hub](https://github.com/apache/subversion)
-- [License](https://www.apache.org/licenses/LICENSE-2.0)
-- [Features](https://subversion.apache.org/features.html)
-- [Package](https://packages.apache.org/subversion)
 
-## Maintainers
+## API Evangelist rating
 
-**Email:** dev@subversion.apache.org
-**URL:** https://www.apache.org/
+**Kin Score 31.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 53.2 |
+| Contract governance | 13.6 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/svn/](https://apis.io/providers/svn/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Subversion: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/svn/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
